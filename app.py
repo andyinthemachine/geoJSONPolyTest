@@ -1,66 +1,35 @@
 
 # import sys;
 # print (sys.path)
-from flask import Flask, jsonify, request, render_template  # capitalize class, lowercase method 
+
+from flask import Flask, jsonify, request, render_template 
+from shapely.geometry import Polygon, shape
 
 app = Flask(__name__)
 
-stores = [
-    {
-        'name': 'My Store',
-        'items': [
-            {
-                'name': 'My Item',
-                'price': 15.99
-            }
-        ]
-    }
-]
-
 @app.route('/')
 def home():
-    return render_template('index.html')
-
-
-@app.route('/store')
-def get_stores():
-    return jsonify({'stores': stores})
-
-c
-@app.route('/store/<string:name>')
-def get_store(name):
-    for store in stores:
-        if store['name'] == name:
-            return jsonify(store)
-    return jsonify({'message': 'store not found'})       
+    return render_template('index.html')    
 
 
 @app.route('/polygons', methods=['POST'])
 def intersect():
     request_data = request.get_json()
-    # new_poly = {
-    #     'name': request_data['name'],
-    #     'items': []
-    # }
-    # stores.append(new_store)
-    print(request_data)
-    return jsonify(request_data)
 
+    poly1 = []
+    poly2 = []
 
-@app.route('/store/<string:name>', methods=['POST'])
-def create_store_item(name):
-    request_data = request.get_json()
-    for store in stores:
-        if store['name'] == name:
-            new_item = {
-                'name': request_data['name'],
-                'price': request_data['price']
-            }
-            store['items'].append(new_item)
-            return jsonify(new_item)
-    return jsonify({'message': 'store not found'})
+    for coord_pair in request_data[0]["geometry"]["coordinates"][0]:
+        poly1.append(tuple(coord_pair))
 
+    for coord_pair in request_data[1]["geometry"]["coordinates"][0]:
+        poly2.append(tuple(coord_pair))
 
+    # print(request_data[0]["geometry"]["coordinates"][0])
+
+    p1 = Polygon(poly1)
+    p2 = Polygon(poly2)
+    return(jsonify(p1.intersects(p2)))
 
 
 

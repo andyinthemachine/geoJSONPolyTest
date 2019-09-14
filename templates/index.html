@@ -105,7 +105,7 @@
 					contentType: "application/json; charset=utf-8",
 					dataType: "json"
 				},
-					JSON.stringify(poly1), response => {
+					JSON.stringify([geoJSON_poly1, geoJSON_poly2]), response => {
 						console.log("Ajax POST ", JSON.stringify(response));
 					});
 			});
@@ -120,7 +120,7 @@
 					contentType: "application/json; charset=utf-8",
 					dataType: "json"
 				},
-					JSON.stringify(poly1), response => {
+					JSON.stringify([geoJSON_poly1, geoJSON_poly3]), response => {
 						console.log("Ajax POST ", JSON.stringify(response));
 					});
 			});
