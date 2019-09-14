@@ -9,6 +9,9 @@
 	<!-- Bootstrap/CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
+	<!-- Bootstrap js -->
+	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
+
 	<!-- JQuery js -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -51,81 +54,108 @@
 				</svg>
 			</div>
 		</div>
+		<div class="row">
 
+			<div class="col-md">
+				<div class="alert alert-dark" role="alert">
+					<span id="span1"> Test Result</span>
+				</div>
+			</div>
+			<div class="col-md">
+				<div class="alert alert-dark" role="alert">
+					<span id="span2"> Test Result </span>
+				</div>
+			</div>
+		</div>
+	</div>
 
-		<!-- <script src="app.js" type="text/javascript"></script> -->
+	<script type="text/javascript">
 
-		<script type="text/javascript">
-
-			const geoJSON_poly1 = {
-				"type": "Feature",
-				"properties": {
-					"name": "Poly 1",
-				},
-				"geometry": {
-					"type": "Polygon",
-					"coordinates": [
-						[[0, 0], [50, 200], [150, 50], [0, 0]]
-					]
-				}
+		const geoJSON_poly1 = {
+			"type": "Feature",
+			"properties": {
+				"name": "Poly 1",
+			},
+			"geometry": {
+				"type": "Polygon",
+				"coordinates": [
+					[[0, 0], [50, 200], [150, 50], [0, 0]]
+				]
 			}
+		}
 
-			const geoJSON_poly2 = {
-				"type": "Feature",
-				"properties": {
-					"name": "Poly 2",
-				},
-				"geometry": {
-					"type": "Polygon",
-					"coordinates": [
-						[[100, 20], [130, 200], [210, 20], [100, 20]]
-					]
-				}
+		const geoJSON_poly2 = {
+			"type": "Feature",
+			"properties": {
+				"name": "Poly 2",
+			},
+			"geometry": {
+				"type": "Polygon",
+				"coordinates": [
+					[[100, 20], [130, 200], [210, 20], [100, 20]]
+				]
 			}
+		}
 
-			const geoJSON_poly3 = {
-				"type": "Feature",
-				"properties": {
-					"name": "Poly 3",
-				},
-				"geometry": {
-					"type": "Polygon",
-					"coordinates": [
-						[[150, 20], [180, 200], [260, 20], [150, 20]] 
-					]
-				}
+		const geoJSON_poly3 = {
+			"type": "Feature",
+			"properties": {
+				"name": "Poly 3",
+			},
+			"geometry": {
+				"type": "Polygon",
+				"coordinates": [
+					[[150, 20], [180, 200], [260, 20], [150, 20]]
+				]
 			}
+		}
 
-			$("#submit1").on("click", function (event) {
-				event.preventDefault();
+		$("#submit1").on("click", function (event) {
+			event.preventDefault();
 
-				const queryURL = "http://localhost:3000/polygons"
-				$.post({
-					url: queryURL,
-					contentType: "application/json; charset=utf-8",
-					dataType: "json"
-				},
-					JSON.stringify([geoJSON_poly1, geoJSON_poly2]), response => {
-						console.log("Ajax POST ", JSON.stringify(response));
-					});
-			});
+			const queryURL = "http://localhost:3000/polygons"
+			$.post({
+				url: queryURL,
+				contentType: "application/json; charset=utf-8",
+				dataType: "json"
+			},
+				JSON.stringify([geoJSON_poly1, geoJSON_poly2]), response => {
+
+					$("#span2").text("Test Result");
+					res = JSON.stringify(response);
+					if (res == "false")
+						$("#span1").text("Polygons do not intersect")
+					else
+						$("#span1").text("Polygons intersect")
+					console.log("Ajax POST ", res);
+				});
+		});
 
 
-			$("#submit2").on("click", function (event) {
-				event.preventDefault();
+		$("#submit2").on("click", function (event) {
+			event.preventDefault();
 
-				const queryURL = "http://localhost:3000/polygons"
-				$.post({
-					url: queryURL,
-					contentType: "application/json; charset=utf-8",
-					dataType: "json"
-				},
-					JSON.stringify([geoJSON_poly1, geoJSON_poly3]), response => {
-						console.log("Ajax POST ", JSON.stringify(response));
-					});
-			});
+			const queryURL = "http://localhost:3000/polygons"
+			$.post({
+				url: queryURL,
+				contentType: "application/json; charset=utf-8",
+				dataType: "json"
+			},
+				JSON.stringify([geoJSON_poly1, geoJSON_poly3]), response => {
 
-		</script>
+					$("#span1").text("Test Result");
+					res = JSON.stringify(response);
+
+					if (res == "false")
+						$("#span2").text("Polygons do not intersect")
+					else
+						$("#span2").text("Polygons intersect")
+
+					console.log("Ajax POST ", JSON.stringify(res));
+				});
+		});
+
+	</script>
 
 </body>
 
