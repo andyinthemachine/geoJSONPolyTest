@@ -10,6 +10,6 @@
 
 ##### UI Sends two geoJSON Polygon objects to server via Ajax POST
 
-##### Pyton server returns boolean result based on whether or not the polygons spatially intersect
+##### Python server returns boolean result based on whether or not the polygons spatially intersect
 
 
