@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+	<meta charset="UTF-8">
+	<title>geoJSON Test</title>
+	<meta name="viewport" content="width=device-width">
+
+	<!-- Bootstrap/CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+	<!-- JQuery js -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<style>
+		.navbar {
+			margin-top: 30px;
+			margin-bottom: 30px;
+		}
+	</style>
+
+</head>
+
+<body>
+	<div class="container">
+
+		<div class="navbar" style="background-color: rgb(42, 43, 97); color: white">
+			<h3 class="text-center">geoJSON Polygon Intersect Test</h3>
+		</div>
+
+		<div class="row">
+			<div class="col-md">
+				<button class="btn btn-primary"
+					style="background-color: rgb(42, 43, 97); color: white; margin-left: 50px; margin-bottom: 25px"
+					id="submit1">Submit</button>
+
+				<svg width="400" height="300">
+					<polygon points="100,20 130,200 210,20 100,20" style="fill:blue;stroke:purple;stroke-width:1" />
+					<polygon points="0,0 50,200 150,50 0,0" style="fill:lime;stroke:purple;stroke-width:1" />
+				</svg>
+			</div>
+
+			<div class="col-md">
+				<button class="btn btn-primary"
+					style="background-color: rgb(42, 43, 97); color: white; margin-left: 50px; margin-bottom: 25px"
+					id="submit2">Submit</button>
+
+				<svg width="400" height="300">
+					<polygon points="150,20 180,200 260,20 150,20" style="fill:blue;stroke:purple;stroke-width:1" />
+					<polygon points="0,0 50,200 150,50 0,0" style="fill:lime;stroke:purple;stroke-width:1" />
+				</svg>
+			</div>
+		</div>
+
+
+		<!-- <script src="app.js" type="text/javascript"></script> -->
+
+		<script type="text/javascript">
+
+			const geoJSON_poly1 = {
+				"type": "Feature",
+				"properties": {
+					"name": "Poly 1",
+				},
+				"geometry": {
+					"type": "Polygon",
+					"coordinates": [
+						[[0, 0], [50, 200], [150, 50], [0, 0]]
+					]
+				}
+			}
+
+			const geoJSON_poly2 = {
+				"type": "Feature",
+				"properties": {
+					"name": "Poly 2",
+				},
+				"geometry": {
+					"type": "Polygon",
+					"coordinates": [
+						[[100, 20], [130, 200], [210, 20], [100, 20]]
+					]
+				}
+			}
+
+			const geoJSON_poly3 = {
+				"type": "Feature",
+				"properties": {
+					"name": "Poly 3",
+				},
+				"geometry": {
+					"type": "Polygon",
+					"coordinates": [
+						[[150, 20], [180, 200], [260, 20], [150, 20]] 
+					]
+				}
+			}
+
+			$("#submit1").on("click", function (event) {
+				event.preventDefault();
+
+				const queryURL = "http://localhost:3000/polygons"
+				$.post({
+					url: queryURL,
+					contentType: "application/json; charset=utf-8",
+					dataType: "json"
+				},
+					JSON.stringify(poly1), response => {
+						console.log("Ajax POST ", JSON.stringify(response));
+					});
+			});
+
+
+			$("#submit2").on("click", function (event) {
+				event.preventDefault();
+
+				const queryURL = "http://localhost:3000/polygons"
+				$.post({
+					url: queryURL,
+					contentType: "application/json; charset=utf-8",
+					dataType: "json"
+				},
+					JSON.stringify(poly1), response => {
+						console.log("Ajax POST ", JSON.stringify(response));
+					});
+			});
+
+		</script>
+
+</body>
+
+</html>
