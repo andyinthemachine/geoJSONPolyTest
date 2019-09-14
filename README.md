@@ -2,7 +2,7 @@
 
 ### **geoJSONPolyTest**  
 
-#### **Author  **Andrew Ulrich**
+#### **Author**  **Andrew Ulrich**
 
 ##### Front end/client side is HTML JavaScript JQuery/Ajax
 
