@@ -1,7 +1,4 @@
 
-# import sys;
-# print (sys.path)
-
 from flask import Flask, jsonify, request, render_template 
 from shapely.geometry import Polygon
 
