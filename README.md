@@ -4,9 +4,9 @@
 
 #### **Author**  **Andrew Ulrich**
 
-##### Front end/client side is HTML JavaScript JQuery/Ajax
+##### Front end/client side is HTML CSS/Bootstrap JavaScript JQuery/Ajax
 
-##### Backend Server is Python/Flask
+##### Backend Server is Python3 in Flask Framework w/shapely library
 
 ##### UI Sends two geoJSON Polygon objects to server via Ajax POST
 

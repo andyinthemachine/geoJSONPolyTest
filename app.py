@@ -3,7 +3,7 @@
 # print (sys.path)
 
 from flask import Flask, jsonify, request, render_template 
-from shapely.geometry import Polygon, shape
+from shapely.geometry import Polygon
 
 app = Flask(__name__)
 
@@ -25,12 +25,9 @@ def intersect():
     for coord_pair in request_data[1]["geometry"]["coordinates"][0]:
         poly2.append(tuple(coord_pair))
 
-    # print(request_data[0]["geometry"]["coordinates"][0])
-
     p1 = Polygon(poly1)
     p2 = Polygon(poly2)
     return(jsonify(p1.intersects(p2)))
-
 
 
 app.run(port=3000)
