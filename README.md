@@ -12,4 +12,9 @@
 
 ##### Python server returns boolean result based on whether or not the polygons spatially intersect
 
+##### Gif Preview
+![GifPreview](/geoPolyTest.gif)
+
+
+
 
